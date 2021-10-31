@@ -106,8 +106,6 @@ class IReport(metaclass=ABCMeta):
                     {
                         **dimension_values,
                         **metric_values,
-                        "_website": self.website,
-                        "_principal_content_type": self.principal_content_type,
                         "_batched_at": NOW.isoformat(timespec="seconds"),
                     }
                 )
@@ -178,11 +176,10 @@ class Acquisitions(IReport):
         "medium",
         "transactionId"
         "clientId",
-        # days to transaction
+        "daysToTransaction"
 
     ]
     metrics = [ 
-        # transaction,revenue,shipping,taxes
         "users",
         "newUsers",
         "sessions",
@@ -192,14 +189,18 @@ class Acquisitions(IReport):
         "avgTimeOnPage",
         "totalEvents",
         "uniqueEvents",
+        "transactionRevenue",
+        "transactionShipping",
+        "transactionTax",
     ]
     schema = [
         {"name": "date", "type": "STRING"},
-        {"name": "deviceCategory", "type": "STRING"},
         {"name": "channelGrouping", "type": "STRING"},
-        {"name": "socialNetwork", "type": "STRING"},
-        {"name": "fullReferrer", "type": "STRING"},
-        {"name": "pagePath", "type": "STRING"},
+        {"name": "source", "type": "STRING"},
+        {"name": "medium", "type": "STRING"},
+        {"name": "transactionId", "type": "STRING"},
+        {"name": "clientId", "type": "STRING"},
+        {"name": "daysToTransaction", "type": "STRING"},
         {"name": "users", "type": "INTEGER"},
         {"name": "newUsers", "type": "INTEGER"},
         {"name": "sessions", "type": "INTEGER"},
@@ -209,8 +210,9 @@ class Acquisitions(IReport):
         {"name": "avgTimeOnPage", "type": "FLOAT"},
         {"name": "totalEvents", "type": "INTEGER"},
         {"name": "uniqueEvents", "type": "INTEGER"},
-        {"name": "_website", "type": "STRING"},
-        {"name": "_principal_content_type", "type": "STRING"},
+        {"name": "transactionRevenue", "type": "FLOAT"},
+        {"name": "transactionShipping", "type": "FLOAT"},
+        {"name": "transactionTax", "type": "FLOAT"},
         {"name": "_batched_at", "type": "TIMESTAMP"},
     ]
 
