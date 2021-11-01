@@ -1,5 +1,5 @@
 from models import UAJob
-from tasks import create_tasks
+from verima.tasks import get_token
 
 
 def main(request):
@@ -20,7 +20,7 @@ def main(request):
 
     if "view_id" in data and "broadcast" not in data:
         response = UAJob(
-            headers=data["headers"],
+            headers=get_token(),
             view_id=data["view_id"],
             start=data.get("start"),
             end=data.get("end"),
